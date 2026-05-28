@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; frame-src https://www.youtube.com https://www.youtube-nocookie.com; img-src 'self' data: https://img.youtube.com https://i.ytimg.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 Summer Life Intervention Program</title>
+<title>2026 Life Intervention Program</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -164,15 +164,22 @@
 
   /* ── FOCUS AREAS ── */
   #focus { background:#fff; }
-  .focus-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:18px; margin-top:48px; }
+  .focus-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:24px; margin-top:48px; }
   .focus-card {
     background:var(--soft); border-radius:18px; padding:24px 16px;
-    text-align:center; transition:transform .2s, background .2s;
-    cursor:default;
+    text-align:center; transition:transform .2s, background .2s, box-shadow .2s;
+    cursor:pointer;
   }
-  .focus-card:hover { transform:translateY(-4px); background:var(--peach); }
+  .focus-card:hover { transform:translateY(-4px); background:var(--peach); box-shadow:0 8px 24px rgba(0,0,0,.1); }
+  .focus-card.active { background:var(--peach); box-shadow:0 8px 24px rgba(0,0,0,.12); transform:translateY(-4px); }
   .focus-card .ico { font-size:2.4rem; margin-bottom:10px; display:block; }
-  .focus-card p { font-weight:800; font-size:.85rem; color:var(--navy); line-height:1.3; }
+  .focus-card p { font-weight:800; font-size:.95rem; color:var(--navy); line-height:1.3; margin-bottom:0; }
+  .focus-card .focus-hint { font-size:.72rem; color:#aaa; margin-top:8px; }
+  .focus-card.active .focus-hint { display:none; }
+  .focus-details { display:none; margin-top:12px; text-align:left; }
+  .focus-card.active .focus-details { display:block; }
+  .focus-desc { font-size:.83rem; color:#555; line-height:1.6; margin-bottom:10px; }
+  .focus-example { font-size:.78rem; color:#666; line-height:1.5; background:#f0f4ff; border-radius:8px; padding:8px 10px; border-left:3px solid var(--sky); }
   .focus-banner {
     margin-top:24px; background:linear-gradient(90deg,var(--plum),#5c3ea5);
     color:#fff; border-radius:16px; padding:20px 28px;
@@ -242,7 +249,7 @@
 
   /* ── WHO IS IT FOR ── */
   #who { background:var(--soft); }
-  .who-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; margin-top:48px; }
+  .who-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; margin-top:24px; }
   .who-card {
     background:#fff; border-radius:18px; padding:24px 20px;
     text-align:center; box-shadow:0 4px 14px rgba(0,0,0,.06);
@@ -250,7 +257,32 @@
   }
   .who-card:hover { transform:translateY(-4px); }
   .who-card .ico { font-size:2.4rem; margin-bottom:10px; display:block; }
-  .who-card p { font-weight:700; font-size:.9rem; color:var(--navy); line-height:1.4; }
+  .who-card p { font-weight:700; font-size:.9rem; color:var(--navy); line-height:1.4; margin-bottom:0; }
+  .who-card .who-hint { font-size:.72rem; color:#aaa; margin-top:6px; }
+  .who-card.active .who-hint { display:none; }
+  .who-details { display:none; margin-top:10px; font-size:.8rem; color:#666; line-height:1.6; background:#f0f4ff; border-radius:8px; padding:8px 10px; border-left:3px solid var(--sky); text-align:left; }
+  .who-card.active .who-details { display:block; }
+  .who-card.active { box-shadow:0 8px 24px rgba(0,0,0,.12); transform:translateY(-4px); }
+  .who-group-title { display:flex; align-items:center; gap:12px; margin:40px 0 16px; font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.1rem; color:var(--navy); }
+  .who-group-title .who-group-badge { padding:5px 16px; border-radius:30px; font-size:.82rem; font-weight:800; }
+  .who-group-title .badge-student { background:var(--sky); color:#fff; }
+  .who-group-title .badge-family { background:var(--leaf); color:#fff; }
+  .who-group-title .divider { flex:1; height:2px; border-radius:2px; }
+  .who-group-title .divider-sky { background:linear-gradient(90deg,var(--sky),transparent); }
+  .who-group-title .divider-leaf { background:linear-gradient(90deg,var(--leaf),transparent); }
+
+  /* ── Q&A ── */
+  .qa-group-title { font-family:'Baloo 2',sans-serif; font-weight:800; font-size:1.05rem; color:var(--navy); display:flex; align-items:center; gap:12px; margin:40px 0 16px; }
+  .qa-group-badge { padding:5px 18px; border-radius:30px; font-size:.82rem; font-weight:800; }
+  .qa-divider { flex:1; height:2px; border-radius:2px; }
+  .qa-item { background:#fff; border-radius:14px; margin-bottom:10px; box-shadow:0 2px 12px rgba(0,0,0,.06); overflow:hidden; }
+  .qa-question { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; font-weight:700; font-size:.92rem; color:var(--navy); transition:background .2s; gap:12px; }
+  .qa-question:hover { background:var(--soft); }
+  .qa-question.open { background:var(--soft); }
+  .qa-arrow { font-size:1rem; transition:transform .3s; color:#aaa; flex-shrink:0; }
+  .qa-question.open .qa-arrow { transform:rotate(180deg); color:var(--sky); }
+  .qa-answer { display:none; padding:0 22px 18px; font-size:.87rem; color:#555; line-height:1.8; border-top:1px solid #f0f0f0; }
+  .qa-answer.open { display:block; }
 
   /* ── PHILOSOPHY ── */
   #philosophy {
@@ -351,6 +383,13 @@
   }
   .act-card-body { padding:20px 24px; flex:1; display:flex; flex-direction:column; gap:12px; }
   .act-desc { font-size:.92rem; line-height:1.65; color:#555; flex:1; }
+  .act-hint { font-size:.75rem; color:#aaa; margin-top:4px; }
+  .act-examples { display:none; margin-top:12px; background:#f8f9ff; border-radius:10px; padding:12px 14px; border-left:3px solid var(--sky); }
+  .act-card.act-open .act-examples { display:block; }
+  .act-card.act-open .act-hint { display:none; }
+  .act-examples p { font-size:.82rem; color:#555; font-weight:700; margin-bottom:6px; }
+  .act-examples ul { margin:0; padding-left:16px; }
+  .act-examples ul li { font-size:.8rem; color:#666; line-height:1.7; }
   .act-skills { display:flex; flex-wrap:wrap; gap:6px; }
   .act-skill-tag { background:#fff; border:1.5px solid #ddd; color:#555; font-size:.72rem; font-weight:700; padding:3px 10px; border-radius:20px; }
   .act-card-footer { padding:14px 24px; border-top:1px solid rgba(0,0,0,.06); display:flex; align-items:center; justify-content:space-between; }
@@ -633,17 +672,20 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" onclick="showHome(event)">Summer <span>Life</span> Program</a>
+  <a class="nav-logo" href="#" onclick="showHome(event)"><span>Life</span> Intervention Program</a>
   <div class="nav-links">
     <a href="#" onclick="showHome(event)" class="nav-link active" data-target="home">🏠 Home</a>
+    <a href="#" onclick="showPage(event,'about')" class="nav-link" data-target="about">About</a>
     <a href="#" onclick="showPage(event,'focus')" class="nav-link" data-target="focus">Focus Areas</a>
     <a href="#" onclick="showPage(event,'schedule')" class="nav-link" data-target="schedule">Schedule</a>
     <a href="#" onclick="showPage(event,'activities')" class="nav-link" data-target="activities">Activities</a>
     <a href="#" onclick="showPage(event,'resources')" class="nav-link" data-target="resources">Resources</a>
     <a href="#" onclick="showPage(event,'team')" class="nav-link" data-target="team">Our Team</a>
     <a href="#" onclick="showPage(event,'who')" class="nav-link" data-target="who">Who It's For</a>
-    <a href="#" onclick="showPage(event,'philosophy')" class="nav-link" data-target="philosophy">Philosophy</a>
-    <a href="#" onclick="showPage(event,'photos')" class="nav-link" data-target="photos">📸 Photos</a>
+    <a href="#" onclick="showPage(event,'apply')" class="nav-link" data-target="apply">Apply</a>
+    <a href="#" onclick="showPage(event,'qa')" class="nav-link" data-target="qa">Q&A</a>
+    <a href="#" onclick="showPage(event,'survey')" class="nav-link" data-target="survey">Survey</a>
+    <a href="#" onclick="showPage(event,'links')" class="nav-link" data-target="links">🔗 Links</a>
     <a href="#" onclick="showPage(event,'contact')" class="nav-link" data-target="contact">Contact</a>
   </div>
 </nav>
@@ -660,13 +702,13 @@
     </div>
     <span class="sep">×</span>
     <div style="display:flex;align-items:center;gap:10px;">
-      <img src="data:image/png;base64,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" alt="University of Tennessee Knoxville" style="height:40px;filter:none;background:#fff;border-radius:6px;padding:3px 8px;">
+      <img src="data:image/png;base64,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" alt="University of Tennessee Knoxville" style="height:44px;filter:none;">
       <span class="ut">The University of Tennessee · Knoxville</span>
     </div>
   </div>
   <div class="hero-body container">
-    <div class="hero-badge">☀️ 2026 Program</div>
-    <h1>Summer <span class="accent-sun">Life</span><br>Intervention<br><span class="accent-leaf">Program</span></h1>
+    <div class="hero-badge">☀️ Launched Summer 2026</div>
+    <h1><span class="accent-sun">Life</span><br>Intervention<br><span class="accent-leaf">Program</span></h1>
     <p class="hero-sub">Turn Everyday Life into the Most Natural Learning Environment! Integrating ABA principles and OT-based functional life-skills training, this program embeds intervention into everyday routines—so students can learn, grow, and become more independent.</p>
     <div class="hero-cta">
       <a href="#" onclick="showPage(event,'schedule')" class="btn-primary">View Schedule</a>
@@ -677,6 +719,24 @@
     <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
   </svg>
 </div>
+
+<!-- PROGRAM INTRO VIDEO ON HOME PAGE -->
+<section style="background:var(--soft);padding:72px 0;">
+  <div class="container" style="max-width:760px;text-align:center;">
+    <div class="section-label">Program Introduction</div>
+    <h2 class="section-title">See the Program in Action</h2>
+    <p style="font-size:.97rem;color:#555;line-height:1.8;margin-bottom:32px;">Watch our program introduction to learn more about our mission, approach, and the families and volunteers who make it all possible.</p>
+    <a href="https://youtu.be/9S38OyVy6-w" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:12px;background:var(--navy);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(26,58,107,.3);transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(26,58,107,.4)'"
+       onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(26,58,107,.3)'">
+      <div style="background:#FF0000;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">▶</div>
+      Watch Introduction Video on YouTube ↗
+    </a>
+    <p style="margin-top:12px;font-size:.78rem;color:#aaa;">youtu.be/9S38OyVy6-w · Opens in a new tab</p>
+  </div>
+</section>
+
 
 <section id="about">
   <div class="container">
@@ -750,9 +810,114 @@
   </div>
 </section>
 
+
+<!-- PHILOSOPHY ON HOME PAGE -->
+<section style="background:var(--navy);padding:72px 0;">
+  <div class="container" style="text-align:center;max-width:760px;">
+    <div class="section-label" style="color:var(--sun);">Our Philosophy</div>
+    <h2 class="section-title" style="color:#fff;">Learning That Lasts a Lifetime</h2>
+    <p style="color:rgba(255,255,255,.85);font-size:1.05rem;line-height:1.8;margin-bottom:36px;">We hope students will not only learn skills in a classroom, but also bring those skills back to their homes, communities, and real life. We also hope parents will not passively wait for intervention outcomes, but instead become the most important partners in their children's growth.</p>
+    <div class="phil-quote">"Let every family routine become an opportunity for a child to grow!"</div>
+  </div>
+</section>
+
 </section>
 
 </div><!-- /page-home -->
+
+<!-- ABOUT PAGE -->
+<div id="page-about" class="site-page">
+<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>About</span></div>
+<section style="background:var(--soft);">
+  <div class="container">
+    <div class="section-label">Our Story & Mission</div>
+    <h2 class="section-title">Why This Program Exists</h2>
+    <p class="section-intro">We believe that real life is the best classroom. Here is the story behind why we created this program and what drives everything we do.</p>
+
+    <!-- Mission statement banner -->
+    <div style="background:linear-gradient(135deg,var(--navy),#2a4a8a);border-radius:20px;padding:32px 36px;margin:40px 0 32px;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:12px;">💛</div>
+      <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.15rem;color:#fff;margin-bottom:12px;">Our Mission</p>
+      <p style="color:rgba(255,255,255,.88);font-size:.97rem;line-height:1.8;max-width:680px;margin:0 auto;">To help families build meaningful life-skill practice into real daily routines — through student choice, family partnership, and gradual independence.</p>
+    </div>
+
+    <!-- Why we created this program -->
+    <div style="background:#fff;border-radius:20px;padding:36px 40px;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:28px;">
+      <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin-bottom:20px;">🌱 Why We Created This Program</h3>
+
+      <p style="font-size:.93rem;color:#444;line-height:1.85;margin-bottom:16px;">The Life Intervention Program was created to help families build meaningful life-skill practice into real daily routines. Many families spend a great deal of time managing therapy appointments, especially when their child receives multiple services such as Applied Behavior Analysis (ABA), Occupational Therapy (OT), Physical Therapy (PT), and Speech Therapy (ST). These services are valuable, but they often happen in clinics, separate locations, or scheduled sessions that do not always become part of the family's natural daily life.</p>
+
+      <p style="font-size:.93rem;color:#444;line-height:1.85;margin-bottom:16px;">Even when services are provided at home, parents and caregivers may remain on the side rather than actively participating in the learning process. As a result, therapy becomes part of the family's schedule, but not always part of the family's lived routines.</p>
+
+      <p style="font-size:.93rem;color:#444;line-height:1.85;margin-bottom:16px;">This program was also developed from the understanding that real-life skills do not belong to only one professional discipline. Communication, functional performance, physical participation, behavior, motivation, and independence are deeply connected in daily activities. Preparing a snack, choosing food at a grocery store, following an exercise routine, or participating in a community activity may require communication, motor skills, choice-making, attention, self-regulation, and motivation all at the same time. Although ST, OT, PT, and ABA each provide valuable perspectives, families often need support in connecting these ideas into one practical, routine-based plan.</p>
+
+      <p style="font-size:.93rem;color:#444;line-height:1.85;margin-bottom:16px;">A central belief of this program is that individuals with disabilities should be supported to become as independent as possible. Functional skills are an important foundation for broader participation, confidence, enrichment, and quality of life. This program emphasizes repeated practice within meaningful routines, so students have more opportunities to use and strengthen skills in the places where daily life actually happens.</p>
+
+      <p style="font-size:.93rem;color:#444;line-height:1.85;margin-bottom:16px;">As individuals grow, they also need more opportunities to make choices, plan activities, and participate in decisions about their own lives. Choice-making and decision-making are not small skills — they support communication, problem-solving, self-advocacy, motivation, confidence, and independence. For this reason, the program emphasizes student choice, not only family or adult-selected goals. We want to understand what the student enjoys, prefers, and wants to work toward.</p>
+
+      <!-- Highlighted closing statement -->
+      <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:14px;padding:20px 24px;border-left:4px solid var(--leaf);margin-top:8px;">
+        <p style="font-size:.93rem;color:#2e7d32;line-height:1.85;margin:0;">This program does not replace ABA, OT, PT, ST, or other professional therapy services. Instead, it serves as a <strong>family-centered supplement</strong>. Families, students, and volunteers work together to choose meaningful goals, break them into small practice steps, use simple supports and prompts, and celebrate progress in daily life. The focus is not perfection or clinical treatment — the focus is <strong>meaningful participation, family involvement, student choice, and gradual independence.</strong></p>
+      </div>
+    </div>
+
+    <!-- Core values -->
+    <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.1rem;color:var(--navy);margin:36px 0 16px;">💡 Our Core Values</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:40px;">
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid var(--sky);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">👨‍👩‍👧</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);margin-bottom:6px;">Family-Centered</div>
+        <div style="font-size:.82rem;color:#666;line-height:1.6;">Goals are developed with the student and family — never imposed on them.</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid var(--leaf);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">🏠</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);margin-bottom:6px;">Routine-Based</div>
+        <div style="font-size:.82rem;color:#666;line-height:1.6;">Practice fits naturally into the student's daily life — not added as extra work.</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid var(--sun);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">🔑</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);margin-bottom:6px;">Student Choice</div>
+        <div style="font-size:.82rem;color:#666;line-height:1.6;">Students have a voice in choosing their goals and shaping their practice.</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid #e91e63);">
+        <div style="font-size:1.8rem;margin-bottom:8px;">📈</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);margin-bottom:6px;">Gradual Independence</div>
+        <div style="font-size:.82rem;color:#666;line-height:1.6;">We reduce support over time so students build lasting, real-world independence.</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid #9c27b0;">
+        <div style="font-size:1.8rem;margin-bottom:8px;">🤝</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);margin-bottom:6px;">Community-Driven</div>
+        <div style="font-size:.82rem;color:#666;line-height:1.6;">Caring volunteers and professional experts work side by side with families.</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-top:4px solid #00bcd4;">
+        <div style="font-size:1.8rem;margin-bottom:8px;">🌈</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);margin-bottom:6px;">Holistic Perspective</div>
+        <div style="font-size:.82rem;color:#666;line-height:1.6;">Real-life skills connect communication, movement, behavior, and motivation together.</div>
+      </div>
+    </div>
+
+    <!-- Partners -->
+    <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.1rem;color:var(--navy);margin:0 0 16px;">🤝 Our Partners</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:20px;margin-bottom:48px;">
+      <div style="background:#fff;border-radius:16px;padding:24px 28px;flex:1;min-width:220px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;align-items:center;gap:16px;">
+        <img src="data:image/png;base64,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" alt="True Love" style="height:56px;width:auto;flex-shrink:0;">
+        <div>
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);font-size:.95rem;">True Love</div>
+          <div style="font-size:.8rem;color:#666;line-height:1.6;">Non-profit organization dedicated to improving the livelihood of individuals with special needs through community, volunteer support, and family engagement.</div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:16px;padding:24px 28px;flex:1;min-width:220px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;align-items:center;gap:16px;">
+        <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAA7AD4DASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAABwgABgECBAX/xAA9EAABAgMDBwoCCQUAAAAAAAABAgMABAUGERIHFyExcZGSMjZBUVJUVbGz0hTRExUiIzRhcnShJlOyweH/xAAaAQADAAMBAAAAAAAAAAAAAAADBAUAAQYC/8QALxEAAQIFAAcHBQEAAAAAAAAAAQIDAAQFBhESEyEyYYHRMUFRUqGx4RQiNHHBcv/aAAwDAQACEQMRAD8Abm0VWYolIfqcyhxbTOHElsAqN6gkayOuKhnVoXcajwI98etlXP8AQdQH5teomBhk9sszaZ+cQ9NOMBhKSMIBvvv+UcdW6pUGagiVlMEqGdvPpHT0mnSTskuZmiQEnGzl1i851qF3Go8CPfEzrULuNR4Ee+OfNPI+LTPCImaeR8WmeAQLWXL5U+nWCaugeZXr0jozrULuNR4Ee+JnWoXcajwI98c+aeR8WmeARM08j4tM8IjNZcvlT6dYzV0DzK9ekdTWVOhrcSgSVRBUbh9hHui+6CAegwudZp6aVaZ6nIcU4lh8JC1AXnV84YtHITshy26pNTqnkTOMoIHv0hSvU6Wk0tKl84WCdvKKxlY5hVDa16iYqGQlQTOVW8gfdteaot2VjmHUNrXqJgEtuuN34HFJv14VEXxFuOe+grLUxjOE9YsUGTM7SnWAcZV0gx2mykyVKqjkhKyK5xTK8Dqw5gSkjWBoN5Gnq1RZ7L1yVtBSkz8oFpBJStCxpSoax+f/AGFzJJUVKJJJ0k64NGRTmo5+5X5Jg1vXDN1CfU24ftIJA8IDXKHLSMmlaN7IBPjHoW2tpJ2ZW1Llhc1NOJxhsKwgJvuvJ09IO6NrE2xk7SoeSGTKzLIBU0peK9J6QdF8D/LbztY/Zo/zXFHbWtBxNrUk3XXg3GFqhdM1J1JaDtQnZj5hiQtyWm6elY2LPfz8IsFtiDbyfI1fFD/UH5GlCdkLJLqUubaUtRUorF5JvJ0wziOQnZDlmva9yZcGzSIPvC11tahEu3ndBHtFXyscwqhta9RMAY6oPOVjmFUNrXqJgDHVEW+fz0f5HuYrWd+Gv/X8EY6INORVKhZJSiCAZld1+wQMrFWfNpKuZATIlghoulWDFoCgLujr/iDrQKVK0SlM06VB+jaHKOtR6SesmGbLp72u+qOxGCIXu2fa1QlhvZyeECrLclQtXLru0GTSAdi1/MRROiD1buyctaeWaJf+GmWL8DuHECDrSReOobN8AypSpkqhMySlhamHltFQF1+E3RMuunPS84p9Q+1Z2GH7Zn2npVLA3k9o5xpK/iWv1p8xDOp5CdkLFK/imv1p8xDOp5CdkXLD3XuX9iRem81z/kVfKqlS7Cz6UgqUS3cALyfvEwDPhpn+w7wGGbOnQYxhTdyRuizW7aFVfS9rNHAx2Z8ePGJNIuA01otBGlk57ceHCFtp7tVp7xekTNS7hThK2wQbury3R3/X9qvEqnxKhhMKeyN0TCnsjdCDdnOtJ0UTJA4D5h5y6W3FZXLgnifiF7NetV4lU+JUeU81OvPLeeafW4tRUpSkG9RJ0n+YZrAnsjdEwJ7I3R5ds1b2A5ME/sfMbautDWS3Lgfo/ELNLy0wJhpSmHQAsEkoIAF4hl0aEDZGShPZG6NhFuhUIUkLAXpaWO7HZEms1k1MoJRo6Oe/PbiP/9k=" alt="University of Tennessee Knoxville" style="height:56px;width:auto;flex-shrink:0;">
+        <div>
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;color:var(--navy);font-size:.95rem;">University of Tennessee, Knoxville</div>
+          <div style="font-size:.8rem;color:#666;line-height:1.6;">Academic partner providing research-based guidance, technical expertise, and professional oversight through the Department of Special Education.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div><!-- /page-about -->
 
 <!-- FOCUS AREAS PAGE -->
 <div id="page-focus" class="site-page">
@@ -762,14 +927,87 @@
     <div class="section-label">Key Focus Areas</div>
     <h2 class="section-title">Skills We Build Together</h2>
     <div class="focus-grid">
-      <div class="focus-card"><span class="ico">🚩</span><p>Self-Determination</p></div>
-      <div class="focus-card"><span class="ico">📣</span><p>Self-Advocacy</p></div>
-      <div class="focus-card"><span class="ico">🔥</span><p>Self-Motivation</p></div>
-      <div class="focus-card"><span class="ico">🌱</span><p>Personal Growth & Exploration</p></div>
-      <div class="focus-card"><span class="ico">🏃</span><p>Physical Health & Exercise</p></div>
-      <div class="focus-card"><span class="ico">👕</span><p>Self-Care Skills</p></div>
-      <div class="focus-card"><span class="ico">👥</span><p>Social Skills & Social Services</p></div>
-      <div class="focus-card"><span class="ico">⚙️</span><p>Executive Function</p></div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">🚩</span>
+        <p>Self-Determination</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Making your own choices and taking ownership of your goals and daily decisions.</div>
+          <div class="focus-example">💡 Example: Choosing what to cook for dinner and deciding how to spend free time independently.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">📣</span>
+        <p>Self-Advocacy</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Expressing your needs, preferences, and rights clearly and confidently.</div>
+          <div class="focus-example">💡 Example: Telling a store employee you need help, or asking a teacher to repeat instructions.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">🔥</span>
+        <p>Self-Motivation</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Finding the inner drive to start, persist, and complete tasks — even without reminders.</div>
+          <div class="focus-example">💡 Example: Starting a chore without being asked, or finishing a project on your own schedule.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">🌱</span>
+        <p>Personal Growth & Exploration</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Discovering new interests, building confidence, and learning who you are through real experiences.</div>
+          <div class="focus-example">💡 Example: Trying a new hobby, visiting a community center, or learning a new life skill each week.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">🏃</span>
+        <p>Physical Health & Exercise</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Building healthy habits around movement, nutrition, rest, and body awareness.</div>
+          <div class="focus-example">💡 Example: Creating a daily walk routine, preparing a healthy snack, or tracking sleep habits.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">👕</span>
+        <p>Self-Care Skills</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Managing personal hygiene, grooming, and daily care routines with independence.</div>
+          <div class="focus-example">💡 Example: Following a morning hygiene checklist, doing laundry, or organizing a personal space.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">👥</span>
+        <p>Social Skills & Social Services</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Building positive relationships, navigating community settings, and accessing support systems.</div>
+          <div class="focus-example">💡 Example: Practicing conversation skills, using public transportation, or visiting a community service office.</div>
+        </div>
+      </div>
+
+      <div class="focus-card" onclick="this.classList.toggle('active')">
+        <span class="ico">⚙️</span>
+        <p>Executive Function</p>
+        <div class="focus-hint">Tap to learn more</div>
+        <div class="focus-details">
+          <div class="focus-desc">Developing planning, organization, time management, and flexible thinking skills.</div>
+          <div class="focus-example">💡 Example: Making a weekly task schedule, using a checklist to plan a grocery trip, or breaking a big goal into steps.</div>
+        </div>
+      </div>
+
     </div>
     <div class="focus-banner">
       <span>💼</span>
@@ -785,7 +1023,7 @@
 <div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Schedule</span></div>
 <section id="schedule">
   <div class="container">
-    <div class="section-label">Program Schedule</div>
+    <div class="section-label">2026 Summer Schedule</div>
     <h2 class="section-title">Your Journey This Summer</h2>
     <div class="timeline">
       <div class="tl-item">
@@ -793,14 +1031,14 @@
         <div class="tl-content">
           <span class="date-tag">May 19 · 9:00–9:30 pm</span>
           <h3>Kickoff Session</h3>
-          <p>Program overview, family task planning, and launch instructions. Get ready for the summer ahead!</p>
+          <p>Program overview, family task planning, and launch instructions. Get ready for the program ahead!</p>
         </div>
       </div>
       <div class="tl-item">
         <div class="tl-dot d2">💻</div>
         <div class="tl-content">
           <span class="date-tag">May 20 – July 22</span>
-          <h3>Online Summer Camp</h3>
+          <h3>Online Life Skills Camp</h3>
           <p>Online guidance and task implementation with weekly progress feedback. Learn and practice from home.</p>
         </div>
       </div>
@@ -808,7 +1046,7 @@
         <div class="tl-dot d3">🏕️</div>
         <div class="tl-content">
           <span class="date-tag">July 23 – August 1 · 3:00–5:30 pm</span>
-          <h3>In-Person Summer Camp</h3>
+          <h3>In-Person Life Skills Camp</h3>
           <p>Daily family life task practice. Group meeting time where students and families connect, collaborate, and grow together.</p>
         </div>
       </div>
@@ -864,39 +1102,118 @@
 
 </div><!-- /page-schedule -->
 
-<!-- WHO PAGE -->
 <div id="page-who" class="site-page">
 <div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Who It's For</span></div>
 <section id="who">
   <div class="container">
     <div class="section-label">Who Is It For?</div>
-    <h2 class="section-title">Youth With Special Needs Who Want to Grow</h2>
-    <p class="section-intro">This program is designed to strengthen key abilities that support independence and a fulfilling future.</p>
-    <div class="who-grid">
-      <div class="who-card"><span class="ico">🌞</span><p>Daily Living & Self-Care Skills</p></div>
-      <div class="who-card"><span class="ico">👨‍👩‍👦</span><p>Family Participation Skills</p></div>
-      <div class="who-card"><span class="ico">💬</span><p>Social Communication Skills</p></div>
-      <div class="who-card"><span class="ico">🧠</span><p>Executive Function</p></div>
-      <div class="who-card"><span class="ico">🔑</span><p>Independent Choice-Making & Problem-Solving</p></div>
-      <div class="who-card"><span class="ico">💼</span><p>Future Vocational & Community Living Skills</p></div>
+    <h2 class="section-title">Is This Program Right for Us?</h2>
+    <p class="section-intro">This program welcomes <strong>youth with special needs (ages 8–22)</strong> — including those with autism, intellectual disabilities, developmental delays, or other special needs. We deeply respect both the student's interests and the family's interests. Our goal is to give students <strong>more opportunities to make meaningful choices within their family routines</strong> — so that growth feels natural, personal, and empowering. Students should be able to <strong>follow basic directions</strong> and demonstrate <strong>no aggressive behavior</strong> in group settings. Tap each card to learn more.</p>
+
+    <!-- Eligibility summary bar -->
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 8px;justify-content:center;">
+      <div style="background:#e3f2fd;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#1565c0;">🎂 Ages 8–22</div>
+      <div style="background:#e8f5e9;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#2e7d32;">🏠 Online & In-Person</div>
+      <div style="background:#fff3e0;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#e65100;">👨‍👩‍👧 Family Participation Required</div>
+      <div style="background:#f3e5f5;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#6a1b9a;">✅ No Clinical Experience Needed</div>
+      <div style="background:#e8f5e9;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#2e7d32;">👂 Can Follow Basic Directions</div>
+      <div style="background:#fce4ec;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#c62828;">🕊️ No Aggressive Behavior</div>
     </div>
+
+    <!-- Our Approach banner -->
+    <div style="background:linear-gradient(135deg,var(--navy),#2a4a8a);border-radius:20px;padding:28px 32px;margin:32px 0 8px;display:flex;align-items:flex-start;gap:20px;">
+      <div style="font-size:2.5rem;line-height:1;">💛</div>
+      <div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.05rem;color:#fff;margin-bottom:8px;">Our Approach: Respect & Choice</div>
+        <p style="color:rgba(255,255,255,.85);font-size:.9rem;line-height:1.7;margin:0;">We respect every student's interests and every family's values. Rather than imposing a fixed curriculum, we work with each family to embed skill-building into routines the student already cares about — giving them more chances to lead, choose, and grow on their own terms.</p>
+      </div>
+    </div>
+
+    <!-- Student Profile -->
+    <div class="who-group-title">
+      <span class="who-group-badge badge-student">👦 Student Profile</span>
+      <div class="divider divider-sky"></div>
+    </div>
+    <div class="who-grid">
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">🌞</span>
+        <p>Daily Living & Self-Care Skills</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Student needs support building independent routines such as hygiene, dressing, meal prep, and home management.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">💬</span>
+        <p>Social Communication Skills</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Student is working on expressing needs, starting conversations, or navigating community interactions like shopping or asking for help.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">🧠</span>
+        <p>Executive Function</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Student benefits from support with planning, organization, time management, and breaking tasks into manageable steps.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">🔑</span>
+        <p>Choice-Making in Family Routines</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">We create opportunities for students to make real choices within everyday family routines — what to cook, how to organize their space, which task to do first — so independence grows naturally from the inside out.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">💼</span>
+        <p>Future Vocational & Community Skills</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Student is building a foundation for future community participation, work readiness, and independent living beyond school.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">👂</span>
+        <p>Able to Follow Basic Directions</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Student can understand and follow simple verbal or visual instructions from an adult or volunteer, which is essential for participating in group and one-on-one activities.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">🕊️</span>
+        <p>No Aggressive Behavior</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">To ensure a safe and supportive environment for all participants, students should not exhibit physical aggression toward others. If you have concerns, please contact us to discuss your child's specific situation.</div>
+      </div>
+    </div>
+
+    <!-- Family Commitment -->
+    <div class="who-group-title">
+      <span class="who-group-badge badge-family">👨‍👩‍👧 Family Commitment</span>
+      <div class="divider divider-leaf"></div>
+    </div>
+    <div class="who-grid">
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">🤝</span>
+        <p>Active Family Participation</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Parents or guardians participate as active partners — not passive observers. You'll help set goals, practice skills at home, and give weekly feedback.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">📅</span>
+        <p>Weekly Practice Commitment</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Families commit to practicing assigned life skills at home each week during the online phase (May–July) and attending in-person sessions (July 23–Aug 2).</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">💬</span>
+        <p>Regular Communication</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">Families check in regularly with their assigned volunteer, share progress updates, and communicate any challenges or adjustments needed.</div>
+      </div>
+      <div class="who-card" onclick="this.classList.toggle('active')" style="cursor:pointer;">
+        <span class="ico">🌱</span>
+        <p>Respect Student Interests & Family Values</p>
+        <div class="who-hint">Tap to learn more</div>
+        <div class="who-details">We ask families to honor the student's interests and let those interests guide skill-building. When a child is motivated by something they love, growth happens faster and feels more meaningful for the whole family.</div>
+      </div>
+    </div>
+
   </div>
 </section>
-
 </div><!-- /page-who -->
-
-<!-- PHILOSOPHY PAGE -->
-<div id="page-philosophy" class="site-page">
-<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Philosophy</span></div>
-<section id="philosophy">
-  <div class="container">
-    <div class="section-label">Our Philosophy</div>
-    <h2 class="section-title">Learning That Lasts a Lifetime</h2>
-    <p class="phil-text">We hope students will not only learn skills in a classroom, but also bring those skills back to their homes, communities, and real life. We also hope parents will not passively wait for intervention outcomes, but instead become the most important partners in their children's growth.</p>
-    <div class="phil-quote">"Let every family routine become an opportunity for a child to grow!"</div>
-  </div>
-</section>
-</div><!-- /page-philosophy -->
 
 <!-- ACTIVITIES PAGE -->
 <div id="page-activities" class="site-page">
@@ -916,7 +1233,7 @@
 
     <div class="act-grid" id="actGrid">
 
-      <div class="act-card" data-phase="both">
+      <div class="act-card" data-phase="both" onclick="this.classList.toggle('act-open')" style="cursor:pointer;">
         <div class="act-card-header ch1">
           <span class="act-emoji">🛒</span>
           <h3>Family Food Budget Project</h3>
@@ -924,6 +1241,16 @@
         </div>
         <div class="act-card-body">
           <p class="act-desc">Plan a family meal, create a grocery list, compare prices, and stay within budget. Practice ordering at a restaurant and asking for help.</p>
+          <p class="act-hint">👆 Click to see real examples</p>
+          <div class="act-examples">
+            <p>💡 Real Examples:</p>
+            <ul>
+              <li>Plan a week of dinners for the family within a $100 budget</li>
+              <li>Visit a grocery store, compare two brands, and choose the better value</li>
+              <li>Order a meal at a restaurant independently, including asking about the menu</li>
+              <li>Track daily spending in a simple notebook or app</li>
+            </ul>
+          </div>
           <div class="act-skills">
             <span class="act-skill-tag">Math</span>
             <span class="act-skill-tag">Planning</span>
@@ -937,7 +1264,7 @@
         </div>
       </div>
 
-      <div class="act-card" data-phase="online">
+      <div class="act-card" data-phase="online" onclick="this.classList.toggle('act-open')" style="cursor:pointer;">
         <div class="act-card-header ch2">
           <span class="act-emoji">📋</span>
           <h3>Weekly Task Planning</h3>
@@ -945,6 +1272,16 @@
         </div>
         <div class="act-card-body">
           <p class="act-desc">Families plan and assign weekly life-skill tasks together. Students practice following schedules, checking off completed tasks, and self-reporting progress.</p>
+          <p class="act-hint">👆 Click to see real examples</p>
+          <div class="act-examples">
+            <p>💡 Real Examples:</p>
+            <ul>
+              <li>Create a visual weekly schedule with morning and evening routines</li>
+              <li>Set 3 personal goals for the week and check them off when done</li>
+              <li>Fill out a simple progress form at the end of each day</li>
+              <li>Share weekly accomplishments with the volunteer during a check-in call</li>
+            </ul>
+          </div>
           <div class="act-skills">
             <span class="act-skill-tag">Executive Function</span>
             <span class="act-skill-tag">Self-Management</span>
@@ -957,7 +1294,7 @@
         </div>
       </div>
 
-      <div class="act-card" data-phase="inperson">
+      <div class="act-card" data-phase="inperson" onclick="this.classList.toggle('act-open')" style="cursor:pointer;">
         <div class="act-card-header ch3">
           <span class="act-emoji">🧺</span>
           <h3>Self-Care & Home Management</h3>
@@ -965,6 +1302,16 @@
         </div>
         <div class="act-card-body">
           <p class="act-desc">Students practice daily self-care routines, laundry, tidying up, and household chores with step-by-step guidance and family support.</p>
+          <p class="act-hint">👆 Click to see real examples</p>
+          <div class="act-examples">
+            <p>💡 Real Examples:</p>
+            <ul>
+              <li>Follow a morning hygiene checklist (brush teeth, wash face, get dressed)</li>
+              <li>Sort, wash, and fold a load of laundry independently</li>
+              <li>Tidy up a bedroom using a step-by-step visual guide</li>
+              <li>Practice making a simple meal like a sandwich or scrambled eggs</li>
+            </ul>
+          </div>
           <div class="act-skills">
             <span class="act-skill-tag">Self-Care Skills</span>
             <span class="act-skill-tag">Independence</span>
@@ -977,7 +1324,7 @@
         </div>
       </div>
 
-      <div class="act-card" data-phase="both">
+      <div class="act-card" data-phase="both" onclick="this.classList.toggle('act-open')" style="cursor:pointer;">
         <div class="act-card-header ch4">
           <span class="act-emoji">🗣️</span>
           <h3>Ordering & Expressing Choices</h3>
@@ -985,6 +1332,16 @@
         </div>
         <div class="act-card-body">
           <p class="act-desc">Role-play real-world scenarios like ordering at a café, asking for directions, or making phone calls. Build confidence in expressing needs and making choices.</p>
+          <p class="act-hint">👆 Click to see real examples</p>
+          <div class="act-examples">
+            <p>💡 Real Examples:</p>
+            <ul>
+              <li>Role-play ordering a coffee at a café and customizing the order</li>
+              <li>Practice asking a stranger for directions to a nearby location</li>
+              <li>Make a phone call to schedule a simple appointment</li>
+              <li>Choose between two options and explain your reasoning to a parent</li>
+            </ul>
+          </div>
           <div class="act-skills">
             <span class="act-skill-tag">Self-Advocacy</span>
             <span class="act-skill-tag">Social Skills</span>
@@ -997,7 +1354,7 @@
         </div>
       </div>
 
-      <div class="act-card" data-phase="inperson">
+      <div class="act-card" data-phase="inperson" onclick="this.classList.toggle('act-open')" style="cursor:pointer;">
         <div class="act-card-header ch5">
           <span class="act-emoji">🏃</span>
           <h3>Physical Health Routine</h3>
@@ -1005,6 +1362,16 @@
         </div>
         <div class="act-card-body">
           <p class="act-desc">Group warm-ups, walks, and simple exercise routines to build healthy habits, body awareness, and stamina as part of everyday life.</p>
+          <p class="act-hint">👆 Click to see real examples</p>
+          <div class="act-examples">
+            <p>💡 Real Examples:</p>
+            <ul>
+              <li>Lead a group warm-up stretch routine for peers</li>
+              <li>Track daily steps using a phone or pedometer and set a personal goal</li>
+              <li>Plan a healthy snack and explain why it's nutritious</li>
+              <li>Create a simple personal exercise plan for the week</li>
+            </ul>
+          </div>
           <div class="act-skills">
             <span class="act-skill-tag">Physical Health</span>
             <span class="act-skill-tag">Self-Motivation</span>
@@ -1017,14 +1384,24 @@
         </div>
       </div>
 
-      <div class="act-card" data-phase="both">
+      <div class="act-card" data-phase="both" onclick="this.classList.toggle('act-open')" style="cursor:pointer;">
         <div class="act-card-header ch6">
           <span class="act-emoji">🏆</span>
           <h3>Final Showcase Project</h3>
           <span class="act-phase-tag">Culminating Activity</span>
         </div>
         <div class="act-card-body">
-          <p class="act-desc">Each student presents their summer project to family and peers — demonstrating skills learned, challenges overcome, and growth achieved.</p>
+          <p class="act-desc">Each student presents their project to family and peers — demonstrating skills learned, challenges overcome, and growth achieved.</p>
+          <p class="act-hint">👆 Click to see real examples</p>
+          <div class="act-examples">
+            <p>💡 Real Examples:</p>
+            <ul>
+              <li>Present a poster or photo journal documenting your summer skill journey</li>
+              <li>Demonstrate a life skill live (e.g. cook a dish, fold laundry, plan a budget)</li>
+              <li>Share one challenge you faced and how you overcame it</li>
+              <li>Set a personal goal for the next season of the program</li>
+            </ul>
+          </div>
           <div class="act-skills">
             <span class="act-skill-tag">Self-Determination</span>
             <span class="act-skill-tag">Presentation Skills</span>
@@ -1050,34 +1427,185 @@
   <div class="container">
     <div class="section-label">Documents & Resources</div>
     <h2 class="section-title">Program Materials</h2>
-    <p class="section-intro">All program documents are freely available for families, volunteers, and educators. Click below to browse, download, and print materials from our shared Google Drive folder.</p>
+    <p class="section-intro">All materials are organized by audience. Find what you need below — everything is available in our shared Google Drive folder.</p>
 
-    <div style="display:flex;flex-direction:column;align-items:center;gap:32px;margin-top:56px;padding-bottom:40px;">
+    <div style="display:flex;flex-direction:column;gap:32px;margin-top:48px;padding-bottom:48px;">
 
-      <!-- Drive card -->
-      <div style="background:#fff;border-radius:24px;padding:48px 40px;max-width:560px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #e8f0fe;">
-        <div style="font-size:4rem;margin-bottom:16px;">📂</div>
-        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.5rem;color:var(--navy);margin-bottom:12px;">Program Resource Folder</h3>
-        <p style="font-size:.97rem;line-height:1.7;color:#555;margin-bottom:32px;">
-          All handouts, templates, activity guides, and training materials are organized in our Google Drive folder. You can view, download, or print any file directly from there.
-        </p>
+      <!-- SECTION 1: FAMILY RESOURCES -->
+      <div style="background:#fff;border-radius:24px;padding:36px;box-shadow:0 4px 20px rgba(0,0,0,.07);border-top:4px solid var(--sky);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="font-size:1.8rem;">👨‍👩‍👧</div>
+          <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin:0;">Family Resources</h3>
+        </div>
+        <p style="font-size:.9rem;color:#666;line-height:1.7;margin-bottom:24px;">Guides and materials to help families understand the program, choose meaningful goals, and support practice at home.</p>
+
+        <!-- Family Guide Video -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">🎬 Family Participation Guide Video</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:12px;">Watch this short guide to see how families participate — from choosing a goal to celebrating progress.</p>
+        <a href="https://youtu.be/883vT_bKG3E" target="_blank" rel="noopener"
+           style="background:#f0f4ff;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;margin-bottom:24px;transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'"
+           onmouseout="this.style.boxShadow=''">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--sky);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+            <div>
+              <div style="font-weight:700;font-size:.85rem;color:var(--navy);">Family Participation Guide</div>
+              <div style="font-size:.75rem;color:#888;">youtu.be/883vT_bKG3E</div>
+            </div>
+          </div>
+          <span style="font-size:.75rem;color:var(--sky);font-weight:700;">Watch on YouTube ↗</span>
+        </a>
+
+        <!-- Family Drive link -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">📄 Family Documents</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:16px;">Family Participation Guide, activity handouts, goal-setting templates, and more.</p>
+        <a href="https://drive.google.com/drive/folders/1Z_yq2s3cR7VVR4MXNW0smeRU9eyM2AXL?usp=drive_link"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;background:#e3f2fd;color:#1565c0;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.88rem;padding:12px 24px;border-radius:50px;text-decoration:none;transition:transform .2s;"
+           onmouseover="this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.transform=''">
+          📂 Open Family Materials in Google Drive ↗
+        </a>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+          <div style="background:#e3f2fd;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#1565c0;">📋 Participation Guide</div>
+          <div style="background:#e3f2fd;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#1565c0;">🎯 Goal Templates</div>
+          <div style="background:#e3f2fd;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#1565c0;">🏠 Activity Handouts</div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: VOLUNTEER RESOURCES -->
+      <div style="background:#fff;border-radius:24px;padding:36px;box-shadow:0 4px 20px rgba(0,0,0,.07);border-top:4px solid var(--leaf);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="font-size:1.8rem;">🤝</div>
+          <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin:0;">Volunteer Resources</h3>
+        </div>
+        <p style="font-size:.9rem;color:#666;line-height:1.7;margin-bottom:24px;">Training materials and tools to help volunteers support families effectively, track progress, and prepare for the final showcase.</p>
+
+        <!-- Volunteer Training Video -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">🎬 Volunteer Training Video 1</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:12px;">Watch this training video to prepare for your volunteer role — covering key responsibilities, goal setting, and how to support families effectively.</p>
+        <a href="https://youtu.be/wdMbqXL9DEg" target="_blank" rel="noopener"
+           style="background:#f0fff4;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;margin-bottom:24px;transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'"
+           onmouseout="this.style.boxShadow=''">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--leaf);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+            <div>
+              <div style="font-weight:700;font-size:.85rem;color:var(--navy);">Volunteer Training — Part 1</div>
+              <div style="font-size:.75rem;color:#888;">youtu.be/wdMbqXL9DEg</div>
+            </div>
+          </div>
+          <span style="font-size:.75rem;color:var(--leaf);font-weight:700;">Watch on YouTube ↗</span>
+        </a>
+
+        <!-- Volunteer Training Video 2 -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">🎬 Volunteer Training Video 2</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:12px;">Continue your volunteer training with part 2 — building on the foundations from the first session.</p>
+        <a href="https://youtu.be/InK2J6qRJMc" target="_blank" rel="noopener"
+           style="background:#f0fff4;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;margin-bottom:24px;transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'"
+           onmouseout="this.style.boxShadow=''">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--leaf);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+            <div>
+              <div style="font-weight:700;font-size:.85rem;color:var(--navy);">Volunteer Training — Part 2</div>
+              <div style="font-size:.75rem;color:#888;">youtu.be/InK2J6qRJMc</div>
+            </div>
+          </div>
+          <span style="font-size:.75rem;color:var(--leaf);font-weight:700;">Watch on YouTube ↗</span>
+        </a>
+
+        <!-- Task Analysis Video -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">🎬 Task Analysis Video</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:12px;">Learn how to break a goal into small, clear, observable steps that students can practice one at a time.</p>
+        <a href="https://www.youtube.com/watch?v=QuVNyuVOBi8" target="_blank" rel="noopener"
+           style="background:#f0fff4;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;margin-bottom:24px;transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'"
+           onmouseout="this.style.boxShadow=''">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--leaf);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+            <div>
+              <div style="font-weight:700;font-size:.85rem;color:var(--navy);">Task Analysis</div>
+              <div style="font-size:.75rem;color:#888;">youtube.com/watch?v=QuVNyuVOBi8</div>
+            </div>
+          </div>
+          <span style="font-size:.75rem;color:var(--leaf);font-weight:700;">Watch on YouTube ↗</span>
+        </a>
+
+        <!-- Meeting Template 1 Video -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">🎬 Volunteer & Family Meeting Template 1 Filling Guide</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:12px;">A step-by-step guide on how to fill out Meeting Template 1 — covering the initial meeting, student strengths, family priorities, and goal selection.</p>
+        <a href="https://youtu.be/cHZhMgPps7Y" target="_blank" rel="noopener"
+           style="background:#f0fff4;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;margin-bottom:24px;transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'"
+           onmouseout="this.style.boxShadow=''">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--leaf);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+            <div>
+              <div style="font-weight:700;font-size:.85rem;color:var(--navy);">Meeting Template 1 Filling Guide</div>
+              <div style="font-size:.75rem;color:#888;">youtu.be/cHZhMgPps7Y</div>
+            </div>
+          </div>
+          <span style="font-size:.75rem;color:var(--leaf);font-weight:700;">Watch on YouTube ↗</span>
+        </a>
+
+        <!-- Meeting Template 2 Video -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">🎬 Volunteer & Family Meeting Template 2 Filling Guide</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:12px;">A step-by-step guide on how to fill out Meeting Template 2 — including activity plan, task analysis, prompt plan, and home practice notes.</p>
+        <a href="https://youtu.be/uAjVfQRP7dg" target="_blank" rel="noopener"
+           style="background:#f0fff4;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;margin-bottom:24px;transition:box-shadow .2s;"
+           onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.1)'"
+           onmouseout="this.style.boxShadow=''">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:var(--leaf);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+            <div>
+              <div style="font-weight:700;font-size:.85rem;color:var(--navy);">Meeting Template 2 Filling Guide</div>
+              <div style="font-size:.75rem;color:#888;">youtu.be/uAjVfQRP7dg</div>
+            </div>
+          </div>
+          <span style="font-size:.75rem;color:var(--leaf);font-weight:700;">Watch on YouTube ↗</span>
+        </a>
+
+        <!-- Volunteer Drive link -->
+        <p style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.9rem;color:var(--navy);margin-bottom:10px;">📄 Volunteer Documents</p>
+        <p style="font-size:.83rem;color:#777;margin-bottom:16px;">Volunteer Handbook, meeting templates, progress monitoring tools, and final presentation planning guides.</p>
+        <a href="https://drive.google.com/drive/folders/1e28pRq5VN2HIrd0yiBy5EZsgwGbjKA_R?usp=sharing"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;background:#e8f5e9;color:#2e7d32;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.88rem;padding:12px 24px;border-radius:50px;text-decoration:none;transition:transform .2s;"
+           onmouseover="this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.transform=''">
+          📂 Open Volunteer Materials in Google Drive ↗
+        </a>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+          <div style="background:#e8f5e9;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#2e7d32;">📘 Volunteer Handbook</div>
+          <div style="background:#e8f5e9;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#2e7d32;">📝 Meeting Templates</div>
+          <div style="background:#e8f5e9;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#2e7d32;">📊 Progress Monitoring</div>
+          <div style="background:#e8f5e9;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#2e7d32;">🏆 Showcase Planning</div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: PROGRAM RESOURCE FOLDER -->
+      <div style="background:#fff;border-radius:24px;padding:36px;box-shadow:0 4px 20px rgba(0,0,0,.07);border-top:4px solid var(--sun);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="font-size:1.8rem;">📂</div>
+          <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin:0;">Program Resource Folder</h3>
+        </div>
+        <p style="font-size:.9rem;color:#666;line-height:1.7;margin-bottom:24px;">Access all program materials in one place — including handouts, templates, slides, and training documents for the entire program.</p>
         <a href="https://drive.google.com/drive/folders/1Pq5PRathFaud5atqcRmSKCVKpAqhSB5C?usp=sharing"
            target="_blank" rel="noopener"
            style="display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(26,58,107,.3);transition:transform .2s,box-shadow .2s;"
            onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(26,58,107,.4)'"
            onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(26,58,107,.3)'">
           <svg width="22" height="22" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>
-          Open in Google Drive
+          Open Full Program Folder ↗
         </a>
-        <p style="margin-top:16px;font-size:.78rem;color:#999;">↗ Opens in a new tab</p>
-      </div>
-
-      <!-- Info pills -->
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:560px;">
-        <div style="background:#e8f5e9;border-radius:30px;padding:10px 20px;display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;color:#2e7d32;">📄 PDFs & Word Docs</div>
-        <div style="background:#e3f2fd;border-radius:30px;padding:10px 20px;display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;color:#1565c0;">📊 Slides & Templates</div>
-        <div style="background:#fff3e0;border-radius:30px;padding:10px 20px;display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;color:#e65100;">🎓 Training Materials</div>
-        <div style="background:#f3e5f5;border-radius:30px;padding:10px 20px;display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:700;color:#6a1b9a;">🏠 Family Activity Guides</div>
+        <p style="margin-top:12px;font-size:.78rem;color:#999;">↗ Opens in a new tab · No sign-in required to view</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+          <div style="background:#fff3e0;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#e65100;">📄 PDFs & Word Docs</div>
+          <div style="background:#fff3e0;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#e65100;">📊 Slides & Templates</div>
+          <div style="background:#fff3e0;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#e65100;">🎓 Training Materials</div>
+          <div style="background:#fff3e0;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#e65100;">🏠 Family Activity Guides</div>
+        </div>
       </div>
 
     </div>
@@ -1156,8 +1684,8 @@
         <div class="title">Project Technical Consultant</div>
         <div class="affil">❤️ Assistant Professor, University of Tennessee · BCBA-D</div>
         <div class="bio">
-          <span class="bio-preview">Assistant Professor of Early Childhood Education/ECSE at the University of Tennessee and Director of the Social-Emotional and Behavioral Learning Research Lab. BCBA-D with seven years of experience as a preschool teacher and early interventionist.</span>
-          <span class="bio-full" style="display:none;">Jun Ai is an Assistant Professor of Early Childhood Education/Early Childhood Special Education and the Director of the Social-Emotional and Behavioral Learning Research Lab. Her research focuses on three lines of inquiry: (1) preparing effective early intervention practitioners to use evidence-based practices for children with or at risk for disabilities; (2) promoting social-emotional and behavioral development through multi-tiered positive behavior support in early care settings, with explicit attention to equity; and (3) understanding mechanisms of early childhood social-emotional learning to foster equitable developmental outcomes. These strands share the overarching goal of ensuring every child — especially those who are minoritized or marginalized — has access to effective, equitable, and inclusive educational opportunities. Jun's research involves quantitative, qualitative, and mixed methods methodologies. She is a Board-Certified Behavior Analyst-Doctoral (BCBA-D) and worked as a preschool teacher and early interventionist for seven years before joining academia.</span>
+          <span class="bio-preview">Assistant Professor of Special Education at the University of Tennessee, Knoxville. Ph.D. from the University of Kansas (#1 public special education graduate program). BCBA-D with over a decade of experience serving children with developmental delays and disabilities.</span>
+          <span class="bio-full" style="display:none;">Jun Ai is an Assistant Professor of Special Education at the University of Tennessee, Knoxville. Dr. Ai earned her Ph.D. in Special Education from the University of Kansas — the #1 public special education graduate program — and is also a doctoral-level board-certified behavior analyst (BCBA-D). Dr. Ai has been serving children with or at risk for developmental delays and disabilities since 2011 through clinical intervention, research, teaching, and supervision. Her scholarship focuses on early intervention, early social-emotional learning, positive behavior support, and family engagement. As a behavioral analyst and an inclusive education advocate, Dr. Ai strives to utilize applied behavior analysis principles and techniques in naturalistic settings.</span>
           <button class="bio-toggle" onclick="toggleBio(this)">Read more ↓</button>
         </div>
       </div>
@@ -1168,20 +1696,24 @@
         <div class="title">Project Design Consultant</div>
         <div class="affil">❤️ BCBA · LBA · Former Special Education Teacher, Public Schools</div>
         <div class="bio">
-          <span class="bio-preview">Board Certified Behavior Analyst (BCBA) and Licensed Behavior Analyst (LBA) based in Atlanta, GA. Interdisciplinary background spanning behavioral science, clinical rehabilitation, and special education.</span>
-          <span class="bio-full" style="display:none;">Weiwei He is a Board Certified Behavior Analyst (BCBA) and Licensed Behavior Analyst (LBA) based in Atlanta, Georgia. She holds a Master of Education in Applied Behavior Analysis from the University of South Carolina and a Master of Medical Science in Pharmaceutical Sciences from China. Her interdisciplinary background bridges behavioral science, clinical knowledge, education, and functional rehabilitation. Her work focuses on translating evidence-based behavioral strategies into meaningful, real-world independence, particularly for individuals with developmental disabilities. She has served in multiple roles, including pharmacist, behavior analyst in clinical settings, and special education teacher in school settings. Since February 2026, she has been involved with True Love, where she supports families in promoting daily living skills, task independence, and functional participation in the community. Her interests include holistic intervention planning, skill generalization to activities of daily living, family-centered support, and health equity in access to rehabilitation services.</span>
+          <span class="bio-preview">Board Certified Behavior Analyst (BCBA) and Licensed Behavior Analyst (LBA) based in Atlanta, GA. Her unique career path from pharmacist to behavior analyst to special education teacher shaped her distinctly holistic perspective on intervention and rehabilitation.</span>
+          <span class="bio-full" style="display:none;">Weiwei He is a Board Certified Behavior Analyst (BCBA) and Licensed Behavior Analyst (LBA) based in Atlanta, Georgia. She holds a Master of Education in Applied Behavior Analysis from the University of South Carolina and a Master of Medical Science in Pharmaceutical Sciences from China. Her career path from pharmacist to behavior analyst to special education teacher shaped her distinctly holistic perspective on intervention and rehabilitation.
+
+This interdisciplinary foundation allows Weiwei to bridge behavioral science, clinical knowledge, and functional education in a way few practitioners can. Her work focuses on translating evidence-based strategies into meaningful, real-world independence for individuals with developmental disabilities. She joined True Love in 2026 to support the launch of the Life Intervention Program, where she works alongside families to promote daily living skills, task independence, and functional participation in the community.
+
+Her areas of focus include holistic intervention planning, skill generalization to activities of daily living, family-centered support, and health equity in access to rehabilitation services.</span>
           <button class="bio-toggle" onclick="toggleBio(this)">Read more ↓</button>
         </div>
       </div>
 
       <div class="team-card lead">
         <span class="role-badge">Project Lead</span>
-        <div class="name">Sobrina Yeh</div>
+        <div class="name">Sabrina Yeh</div>
         <div class="title">Project Training Consultant</div>
-        <div class="affil">❤️ Junior, George Washington University · Major: Psychology</div>
+        <div class="affil">❤️ Rising Senior, George Washington University · Major: Psychology</div>
         <div class="bio">
-          <span class="bio-preview">Junior student at George Washington University majoring in Psychology. Leads training for parents and staff, with a passion for supporting families and youth with special needs.</span>
-          <span class="bio-full" style="display:none;">Sobrina leads training for parents and staff, bringing a fresh perspective as a psychology student at George Washington University and a passion for supporting families and youth with special needs.</span>
+          <span class="bio-preview">Rising senior at George Washington University majoring in Psychology. Lead trainer for parents and volunteers supporting special needs children, with published independent research on neurotypical sibling interactions.</span>
+          <span class="bio-full" style="display:none;">Sabrina Yeh is a rising senior at George Washington University majoring in Psychology. With passion, she serves as the lead trainer for both parents and volunteers to support special needs children. Sabrina previously published an independent research project with Angela Garbin Ph.D. titled "An Evaluation of Neurotypical Sibling Interactions on Autistic Individuals."</span>
           <button class="bio-toggle" onclick="toggleBio(this)">Read more ↓</button>
         </div>
       </div>
@@ -1193,51 +1725,63 @@
         <div class="affil">❤️ True Love for Special Needs Families</div>
         <div class="bio">
           <span class="bio-preview">Operations Director at True Love. Former CEO of a nationwide chain of hospitals in China. Special supporter of this program — provides the venue and all necessary materials.</span>
-          <span class="bio-full" style="display:none;">Elsa is a special supporter of this summer program, generously providing the venue and all necessary materials for the project. She graduated from China Medical University and served as CEO of a nationwide chain of hospitals in China from 2018 to 2023 before immigrating to the United States. Currently, as Operations Director at True Love, Elsa oversees monthly event scheduling, safety protocols, publicity efforts, networking initiatives, HR matters, and financial decisions in alignment with the organization's vision. She ensures all center activities run efficiently to achieve True Love's mission and service goals.</span>
+          <span class="bio-full" style="display:none;">Elsa is a special supporter of this program, generously providing the venue and all necessary materials for the project. She graduated from China Medical University and served as CEO of a nationwide chain of hospitals in China from 2018 to 2023 before immigrating to the United States. Currently, as Operations Director at True Love, Elsa oversees monthly event scheduling, safety protocols, publicity efforts, networking initiatives, HR matters, and financial decisions in alignment with the organization's vision. She ensures all center activities run efficiently to achieve True Love's mission and service goals.</span>
           <button class="bio-toggle" onclick="toggleBio(this)">Read more ↓</button>
         </div>
       </div>
 
     </div>
+
     <div class="team-section-title">
       <span class="ts-icon ts-vol">🤝</span>
       Volunteers
     </div>
     <div class="team-intro" style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);">
-      Volunteers serve as caring helpers and peer buddies for paired families. Guided by the program lead team, they help students and families set meaningful goals that fit naturally into summer routines, break goals into small practice steps, use simple prompts, and share progress after each meeting. Volunteers are not RBTs or clinical providers; they are supportive helpers who encourage real-life skill practice with family participation.
+      Volunteers serve as caring helpers and peer buddies for paired families. Guided by the program lead team, they help students and families set meaningful goals that fit naturally into daily routines, break goals into small practice steps, use simple prompts, and share progress after each meeting. Volunteers are not RBTs or clinical providers; they are supportive helpers who encourage real-life skill practice with family participation.
+    </div>
+
+    <!-- 2026 VOLUNTEERS -->
+    <div style="display:flex;align-items:center;gap:14px;margin:36px 0 20px;">
+      <div style="background:var(--leaf);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;padding:6px 20px;border-radius:30px;">🌱 2026</div>
+      <div style="flex:1;height:2px;background:linear-gradient(90deg,var(--leaf),transparent);"></div>
     </div>
     <div class="team-grid">
 
       <div class="team-card volunteer">
-        <span class="role-badge">Volunteer</span>
+        <span class="role-badge">2026 Volunteer</span>
+        <div class="name">Celina Chen</div>
+        <div class="title">Family Support Volunteer</div>
+        <div class="affil">❤️ Rising Senior, Lambert High School · Alpharetta, GA</div>
+        <div class="bio">
+          <span class="bio-preview">Rising senior at Lambert High School on an aspiring medical pathway. Three-year volunteer at True Love, with hands-on experience supporting individuals with special needs at the adult daycare center and community events.</span>
+          <span class="bio-full" style="display:none;">My name is Celina Chen, and I'm a rising senior at Lambert High School in Georgia. I come from an aspiring medical pathway and have been a volunteer at the non-profit organization True Love for 3 years, where I assisted direct support professionals at the adult daycare center during the 2023–24 summer, in addition to supporting events the organization hosts to improve the livelihood of individuals with special needs. I am excited to contribute to this collaborative effort and hope to coordinate with the participating families throughout the process of developing critical life skills that will have a positive, formative impact on their lives. As a volunteer, I'll communicate regularly with the family I'll be working closely with to establish feasible weekly plans that promote steady progress, ultimately bringing us closer to our shared objective.</span>
+          <button class="bio-toggle" onclick="toggleBio(this)">Read more ↓</button>
+        </div>
+      </div>
+
+      <div class="team-card volunteer">
+        <span class="role-badge">2026 Volunteer</span>
         <div class="name">[ Name ]</div>
         <div class="title">Family Support Volunteer</div>
         <div class="affil">❤️ University of Tennessee, Knoxville</div>
         <div class="bio">Replace this with a short bio — what motivated this volunteer to join, their background, and how they support families in the program.</div>
       </div>
 
-      <div class="team-card volunteer">
-        <span class="role-badge">Volunteer</span>
-        <div class="name">[ Name ]</div>
-        <div class="title">Family Support Volunteer</div>
-        <div class="affil">❤️ True Love</div>
-        <div class="bio">Replace this with a short bio — what motivated this volunteer to join, their background, and how they support families in the program.</div>
-      </div>
-
-      <div class="team-card volunteer">
-        <span class="role-badge">Volunteer</span>
-        <div class="name">[ Name ]</div>
-        <div class="title">Family Support Volunteer</div>
-        <div class="affil">❤️ University of Tennessee, Knoxville</div>
-        <div class="bio">Replace this with a short bio — what motivated this volunteer to join, their background, and how they support families in the program.</div>
-      </div>
-
-      <!-- Add more volunteer cards here -->
+      <!-- Add more 2026 volunteer cards here -->
       <div class="team-add-hint">
         <span>➕</span>
-        <div>Add more volunteers by copying a card block above and updating the details.</div>
+        <div>Add more 2026 volunteers by copying a card block above and updating the details.</div>
       </div>
 
+    </div>
+
+    <!-- 2027 VOLUNTEERS (placeholder for future) -->
+    <div style="display:flex;align-items:center;gap:14px;margin:36px 0 20px;">
+      <div style="background:#b0bec5;color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;padding:6px 20px;border-radius:30px;">🌟 2027</div>
+      <div style="flex:1;height:2px;background:linear-gradient(90deg,#b0bec5,transparent);"></div>
+    </div>
+    <div style="background:#f5f5f5;border-radius:16px;padding:32px;text-align:center;color:#999;font-size:.95rem;margin-bottom:16px;">
+      2027 volunteer profiles will be added here when the program opens for the next year. 🌱
     </div>
   </div>
 </section>
@@ -1245,48 +1789,395 @@
 
 <!-- FOOTER -->
 <!-- PHOTOS PAGE -->
-<div id="page-photos" class="site-page">
-<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Activity Photos</span></div>
+<!-- APPLY PAGE -->
+
+
+<div id="page-apply" class="site-page">
+<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Apply</span></div>
 <section style="background:var(--soft);">
   <div class="container">
-    <div class="section-label">Activity Photos</div>
-    <h2 class="section-title">Our Program in Action</h2>
-    <p class="section-intro">Browse photos from our program activities — updated throughout the summer as students learn, grow, and celebrate together!</p>
+    <div class="section-label">Join the Program</div>
+    <h2 class="section-title">Apply Now</h2>
+    <p class="section-intro">Whether you're a family looking for support or someone who wants to make a difference — we'd love to have you! Choose the application that fits you below.</p>
 
-    <div style="display:flex;flex-direction:column;align-items:center;gap:28px;margin-top:56px;padding-bottom:40px;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-top:56px;padding-bottom:40px;">
 
-      <!-- Google Photos card -->
-      <div style="background:#fff;border-radius:24px;padding:48px 40px;max-width:520px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #e8f0fe;">
-        <div style="font-size:3.5rem;margin-bottom:16px;">📸</div>
-        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin-bottom:10px;">View Our Photo Album</h3>
+      <!-- Student/Family Application -->
+      <div style="background:#fff;border-radius:24px;padding:48px 36px;max-width:440px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #e3f2fd;">
+        <div style="font-size:3.5rem;margin-bottom:16px;">🧒</div>
+        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin-bottom:10px;">Student & Family Application</h3>
         <p style="font-size:.95rem;color:#666;line-height:1.7;margin-bottom:28px;">
-          All activity photos are shared in our Google Photos album. Click below to browse — no account needed!
+          Apply to enroll your child in the Life Intervention Program. We'll match your family with a volunteer and help set meaningful daily life goals together.
         </p>
-        <a href="https://photos.app.goo.gl/mmokzeg2AMJmawGC6"
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGfBg7AkJ5PeOAS4thTP3sPD6CDcKUNJ7f2v_9cGTb_vgo7w/viewform?usp=publish-editor"
            target="_blank" rel="noopener"
-           style="display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(26,58,107,.3);transition:transform .2s,box-shadow .2s;"
-           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(26,58,107,.4)'"
-           onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(26,58,107,.3)'">
-          <svg width="20" height="20" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><circle cx="256" cy="256" r="256" fill="#fff"/><path d="M256 144c-61.9 0-112 50.1-112 112s50.1 112 112 112 112-50.1 112-112-50.1-112-112-112zm0 176c-35.3 0-64-28.7-64-64s28.7-64 64-64 64 28.7 64 64-28.7 64-64 64z" fill="#4FC3F7"/><path d="M256 80c-97.2 0-176 78.8-176 176h48c0-70.7 57.3-128 128-128V80z" fill="#FF6B6B"/><path d="M432 256c0 97.2-78.8 176-176 176v-48c70.7 0 128-57.3 128-128h48z" fill="#66BB6A"/><path d="M80 256c0-40.1 13.4-77 35.8-106.7L79.2 112C49.1 150.7 32 199.4 32 256h48z" fill="#FFB800"/></svg>
-          Open in Google Photos
+           style="display:inline-block;background:var(--sky);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(14,99,189,.3);transition:transform .2s,box-shadow .2s;"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(14,99,189,.4)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(14,99,189,.3)'">
+          Apply as a Family
         </a>
         <p style="margin-top:16px;font-size:.78rem;color:#999;">↗ Opens in a new tab</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px;">
+          <div style="background:#e3f2fd;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#1565c0;">👨‍👩‍👧 Families Welcome</div>
+          <div style="background:#e8f5e9;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#2e7d32;">🏠 Online & In-Person</div>
+          <div style="background:#fff3e0;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#e65100;">🎯 Goal-Based Support</div>
+        </div>
       </div>
 
-      <!-- Info pills -->
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:520px;">
-        <div style="background:#e3f2fd;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#1565c0;">🏕️ In-Person Camp</div>
-        <div style="background:#e8f5e9;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#2e7d32;">💻 Online Activities</div>
-        <div style="background:#fff3e0;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#e65100;">🏆 Final Showcase</div>
-        <div style="background:#f3e5f5;border-radius:30px;padding:10px 20px;font-size:.85rem;font-weight:700;color:#6a1b9a;">👨‍👩‍👧 Family Moments</div>
+      <!-- Volunteer Application -->
+      <div style="background:#fff;border-radius:24px;padding:48px 36px;max-width:440px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #e8f5e9;">
+        <div style="font-size:3.5rem;margin-bottom:16px;">🤝</div>
+        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.4rem;color:var(--navy);margin-bottom:10px;">Volunteer Application</h3>
+        <p style="font-size:.95rem;color:#666;line-height:1.7;margin-bottom:28px;">
+          Join our team of caring volunteers and make a real difference in the lives of special needs families. No clinical experience required — just heart and commitment!
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe1zIH0XlZYTiXUwTjPvi4eojefMWqtXeVJ6mXOEQO2xK9nmA/viewform?usp=publish-editor"
+           target="_blank" rel="noopener"
+           style="display:inline-block;background:var(--leaf);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1rem;padding:16px 36px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(56,142,60,.3);transition:transform .2s,box-shadow .2s;"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(56,142,60,.4)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(56,142,60,.3)'">
+          Apply as a Volunteer
+        </a>
+        <p style="margin-top:16px;font-size:.78rem;color:#999;">↗ Opens in a new tab</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px;">
+          <div style="background:#e8f5e9;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#2e7d32;">🌱 All Backgrounds</div>
+          <div style="background:#f3e5f5;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#6a1b9a;">💪 Make a Difference</div>
+          <div style="background:#e3f2fd;border-radius:30px;padding:6px 14px;font-size:.78rem;font-weight:700;color:#1565c0;">📅 Flexible Hours</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact note -->
+    <p style="text-align:center;font-size:.9rem;color:#888;padding-bottom:40px;">
+      Questions about applying? Email us at <a href="mailto:lifeskillsfor365@gmail.com" style="color:var(--navy);font-weight:700;">lifeskillsfor365@gmail.com</a>
+    </p>
+
+  </div>
+</section>
+</div><!-- /page-apply -->
+
+
+
+<!-- CONTACT PAGE -->
+<!-- Q&A PAGE -->
+<div id="page-qa" class="site-page">
+<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Q&A</span></div>
+<section style="background:var(--soft);">
+  <div class="container">
+    <div class="section-label">Questions & Answers</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-intro">Have questions about the program? We've answered the most common ones below. Click any question to see the answer. Still have questions? <a href="#" onclick="showPage(event,'contact')" style="color:var(--navy);font-weight:700;">Contact us!</a></p>
+
+    <!-- FOR FAMILIES -->
+    <div class="qa-group-title">
+      <span class="qa-group-badge" style="background:#e3f2fd;color:#1565c0;">👨‍👩‍👧 For Families</span>
+      <div class="qa-divider" style="background:linear-gradient(90deg,#e3f2fd,transparent);"></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What will the volunteer do with my child? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Your volunteer serves as a caring helper and peer buddy. They will meet with your family, help choose one meaningful goal that fits your daily routine, break that goal into small practice steps, and encourage your child to participate and make choices. They are not therapists or clinical providers — they are supportive helpers who work alongside your family.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Can I choose the goal my child works on? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Absolutely! Goals are always developed with the student and family — never imposed on them. We deeply respect your family's interests, values, and daily routines. The volunteer will help you identify one small, realistic goal that fits naturally into your existing routine and that your child genuinely cares about.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">How often will we meet with the volunteer? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Here is the full schedule for Summer 2026:
+        <br><br>
+        <strong>🚀 Kick-Off Meeting — May 19 (9:00–9:30 pm)</strong><br>
+        The program officially begins with an online kick-off meeting where families and volunteers meet, learn about the program, and get started.
+        <br><br>
+        <strong>💻 Online Phase — May 20 – July 22</strong><br>
+        Volunteers check in with their paired family once a week online. Each meeting reviews the student's progress, adjusts the practice plan, and sets goals for the coming week. Families practice assigned life skills at home between meetings.
+        <br><br>
+        <strong>🏕️ In-Person Camp — July 23 – August 1 (3:00–5:30 pm daily)</strong><br>
+        Students attend daily in-person sessions where they practice life skills in a structured, supportive group environment with volunteers and program leads.
+        <br><br>
+        <strong>🏆 Final Showcase — August 2 (2:00–6:00 pm)</strong><br>
+        Students and families celebrate their growth and progress at the final showcase event. Each student has the opportunity to share what they practiced and learned.
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What if my child refuses to participate? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">We always respect the student's communication and comfort. If your child refuses or seems distressed, the volunteer will pause the activity and never force participation. The volunteer will consult with the program lead team to adjust the goal or approach so it better fits your child's needs and interests.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Is this a therapy or clinical program? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">No. This is an educational and family-support program, not a clinical or therapy program. Volunteers are not RBTs, BCBAs, therapists, or medical providers. The program is guided by our professional lead team, but the day-to-day support is provided by trained volunteers who help families practice life skills in everyday routines.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Is there a cost for families? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">No. This program is offered free of charge to participating families. It is made possible through the partnership between True Love and the University of Tennessee, Knoxville, and the dedication of our volunteer team.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">How is my child's privacy protected? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">We take privacy very seriously. Volunteers are required to keep all family information confidential. Photos, videos, and student work are only shared with your explicit permission. You decide what — if anything — is shared publicly at the final showcase or on the website. You can withdraw permission at any time.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What happens at the final showcase? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">The final showcase is a celebration of your child's effort, growth, and participation — not a test or formal assessment. Students can demonstrate a skill, share a poster, show photos, or simply have their volunteer or family present on their behalf. You choose what your child is comfortable sharing. The goal is to celebrate progress in a warm, supportive environment.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">How much time does our family need to commit to practice? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">There is no fixed time requirement — it completely depends on your family's comfort level and what feels realistic for your daily routine. Practice can be as short as a few minutes during something you already do, like cooking, grocery shopping, or getting ready in the morning. The goal is meaningful participation that fits naturally into your life, not extra work or pressure. You and your volunteer will decide together what works best for your family each week.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Do we need to become therapists or experts to participate? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Not at all! Families are partners, not therapists. You don't need any clinical knowledge or special training. All you need to do is share your child's interests and routines, help choose a meaningful goal, support short practice opportunities when it feels right, and give feedback on what's working. The program lead team and volunteer will guide everything else.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What simple supports can we use at home during practice? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">You don't need special tools — simple everyday supports work great. For example: showing a picture checklist or written steps (visual prompt), pointing to the next item without giving the answer (gesture prompt), asking "What comes next?" (verbal prompt), offering two choices like "Rice or noodles?" (choice prompt), or simply demonstrating the step first and then letting your child try. Most importantly — give your child time to respond before helping, and use the least support needed so they can build independence gradually.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What if the goal doesn't fit our family routine? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Please let us know right away! Goals should never create stress or conflict with your family's daily life. If a goal feels too hard, too easy, unrealistic, or just doesn't fit your schedule, contact the program lead team and we will work with you and your volunteer to adjust or replace it. The plan is always flexible and centered on what works best for your family.</div>
+    </div>
+    <div class="qa-group-title">
+      <span class="qa-group-badge" style="background:#e8f5e9;color:#2e7d32;">🤝 For Volunteers</span>
+      <div class="qa-divider" style="background:linear-gradient(90deg,#e8f5e9,transparent);"></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What does a volunteer actually do? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Volunteers are paired with one family and serve as a caring helper and peer buddy. You will meet the family, help choose a meaningful daily life goal, break it into small practice steps, use simple prompts and encouragement during practice, record short progress notes after each meeting, and help the family prepare for the final showcase. Everything is guided by the program lead team.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What should I NOT do as a volunteer? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Volunteers should not provide therapy, clinical treatment, diagnosis, or behavior intervention plans. Do not represent yourself as an RBT, BCBA, or therapist. Do not handle unsafe situations alone — always contact the program lead team. Do not share private family information, photos, or videos without permission. Do not force participation, and never change goals without program lead approval.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Do I need clinical or special needs experience? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">No clinical experience is required. What matters most is that you are caring, reliable, and willing to learn. You will receive orientation and guidance from the program lead team before being paired with a family. The handbook and program forms will guide you every step of the way.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What if I'm unsure how to handle a situation? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Always ask the program lead team — that's what they're there for. If a situation feels unclear, outside your role, or involves safety concerns, pause and contact the lead team immediately. Never try to handle complex situations alone. When in doubt, pause and reach out.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">How do I track and record progress? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">After each meeting, you will complete a short progress note using the Weekly Progress Monitoring Tool. Record the date, what the student practiced, what prompt level was used, evidence of progress, family feedback, and next steps. Keep notes brief, objective, and focused on observable behavior — for example, "Student completed 4 of 6 steps with visual support" rather than "did well."</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">How should I communicate with the family? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Use approved communication channels (such as WeChat, email, or the shared program folder) and keep messages professional, brief, and focused on the program plan. Avoid late-night or overly personal communication. Always include the program lead team in important updates. Do not make promises about outcomes or give clinical advice.</div>
+    </div>
+
+    <!-- ABOUT THE PROGRAM -->
+    <div class="qa-group-title">
+      <span class="qa-group-badge" style="background:#fff3e0;color:#e65100;">📋 About the Program</span>
+      <div class="qa-divider" style="background:linear-gradient(90deg,#fff3e0,transparent);"></div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Who is this program for? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">The program serves youth with special needs ages 8–22, including those with autism, intellectual disabilities, developmental delays, or other special needs. Students should be able to follow basic directions and demonstrate no aggressive behavior. Both online and in-person participation options are available. Active family participation is required.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">What makes this program different from other programs? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Unlike classroom-based programs, this program embeds skill-building directly into each family's daily routines. Goals are chosen by the student and family, not imposed. We respect both the student's interests and the family's values, and give students more opportunities to make real choices in their everyday lives. It is guided by professional experts but delivered through caring, trained volunteers — making it accessible, personal, and community-driven.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">Is this program only for the summer? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">No — while the program launched in summer 2026, it is designed as a long-term Life Intervention Program. We plan to continue and expand the program year by year, with new volunteer cohorts (2027, 2028, and beyond) and new families joining each cycle.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-question" onclick="toggleQA(this)">How do I apply? <span class="qa-arrow">▼</span></div>
+      <div class="qa-answer">Families and volunteers can apply through our Apply page. There are separate application forms for families/students and for volunteers. After submitting, the program lead team will review your application and contact you within a few days. You can also email us directly at lifeskillsfor365@gmail.com with any questions.</div>
+    </div>
+
+    <div style="height:40px;"></div>
+  </div>
+</section>
+</div><!-- /page-qa -->
+
+<!-- SURVEY PAGE -->
+<div id="page-survey" class="site-page">
+<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Survey</span></div>
+<section style="background:var(--soft);">
+  <div class="container">
+    <div class="section-label">Program Feedback</div>
+    <h2 class="section-title">Share Your Experience</h2>
+    <p class="section-intro">Your feedback is the most important tool we have to grow and improve. Please take a few minutes to share your thoughts — every response makes a difference!</p>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:28px;margin-top:48px;padding-bottom:40px;">
+
+      <!-- Family Survey -->
+      <div style="background:#fff;border-radius:24px;padding:40px 32px;max-width:340px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #e3f2fd;">
+        <div style="font-size:3rem;margin-bottom:14px;">👨‍👩‍👧</div>
+        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin-bottom:10px;">Family Survey</h3>
+        <p style="font-size:.88rem;color:#666;line-height:1.7;margin-bottom:24px;">Tell us about your family's experience, your child's progress, and how we can better support you.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdi6JFPjgJw0eHAl3bImu_Knf-tg05dkKu8HyPBHoPG0jm18A/viewform?usp=publish-editor"
+           target="_blank" rel="noopener"
+           style="display:inline-block;background:var(--sky);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;padding:14px 30px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(14,99,189,.3);transition:transform .2s,box-shadow .2s;"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(14,99,189,.4)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(14,99,189,.3)'">
+          Take the Survey ↗
+        </a>
+        <p style="margin-top:12px;font-size:.75rem;color:#aaa;">⏱ About 5 minutes</p>
+      </div>
+
+      <!-- Volunteer Survey -->
+      <div style="background:#fff;border-radius:24px;padding:40px 32px;max-width:340px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #e8f5e9;">
+        <div style="font-size:3rem;margin-bottom:14px;">🤝</div>
+        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin-bottom:10px;">Volunteer Survey</h3>
+        <p style="font-size:.88rem;color:#666;line-height:1.7;margin-bottom:24px;">Share your volunteer experience, what worked well, and your ideas for making the program even better next year.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScoGHOtumQnTrOQcdsP4UsPq0XzSytjpVKXHwRavZG5fY8vjA/viewform?usp=publish-editor"
+           target="_blank" rel="noopener"
+           style="display:inline-block;background:var(--leaf);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;padding:14px 30px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(56,142,60,.3);transition:transform .2s,box-shadow .2s;"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(56,142,60,.4)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(56,142,60,.3)'">
+          Take the Survey ↗
+        </a>
+        <p style="margin-top:12px;font-size:.75rem;color:#aaa;">⏱ About 5 minutes</p>
+      </div>
+
+      <!-- Student Survey -->
+      <div style="background:#fff;border-radius:24px;padding:40px 32px;max-width:340px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.08);border:2px solid #fff3e0;">
+        <div style="font-size:3rem;margin-bottom:14px;">😊</div>
+        <h3 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin-bottom:10px;">Student Survey</h3>
+        <p style="font-size:.88rem;color:#666;line-height:1.7;margin-bottom:24px;">Students — we want to hear from you! Tell us what you enjoyed, what you're proud of, and what would make the program better.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc0uGH9U7kpqt0_8lhLPKM5fr9GhFeA9wc91MIsoYrLN4qz7w/viewform?usp=publish-editor"
+           target="_blank" rel="noopener"
+           style="display:inline-block;background:var(--sun);color:var(--navy);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;padding:14px 30px;border-radius:50px;text-decoration:none;box-shadow:0 6px 20px rgba(255,184,0,.3);transition:transform .2s,box-shadow .2s;"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 28px rgba(255,184,0,.4)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 6px 20px rgba(255,184,0,.3)'">
+          Take the Survey ↗
+        </a>
+        <p style="margin-top:12px;font-size:.75rem;color:#aaa;">⏱ About 2 minutes</p>
+      </div>
+
+    </div>
+
+    <!-- Thank you note -->
+    <div style="background:linear-gradient(135deg,var(--navy),#2a4a8a);border-radius:20px;padding:28px 32px;text-align:center;margin-bottom:40px;">
+      <div style="font-size:2rem;margin-bottom:10px;">💛</div>
+      <p style="color:#fff;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1rem;margin-bottom:6px;">Thank you for helping us grow!</p>
+      <p style="color:rgba(255,255,255,.8);font-size:.88rem;line-height:1.7;margin:0;">Every piece of feedback shapes the next year of the program. We read every response carefully and use it to make the Life Intervention Program better for every family, student, and volunteer.</p>
+    </div>
+
+  </div>
+</section>
+</div><!-- /page-survey -->
+
+
+
+<div id="page-links" class="site-page">
+<div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Links</span></div>
+<section style="background:var(--soft);">
+  <div class="container">
+    <div class="section-label">Useful Links</div>
+    <h2 class="section-title">Program Links</h2>
+    <p class="section-intro">Find all our program channels, photo albums, social media, and partner pages in one place. More links will be added as the program grows!</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:48px;padding-bottom:48px;max-width:620px;margin-left:auto;margin-right:auto;">
+
+      <!-- Google Photos -->
+      <a href="https://photos.app.goo.gl/mmokzeg2AMJmawGC6" target="_blank" rel="noopener"
+         style="background:#fff;border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-left:4px solid #4FC3F7;"
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.1)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'">
+        <div style="font-size:2rem;flex-shrink:0;">📸</div>
+        <div style="flex:1;">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;color:var(--navy);">Activity Photos</div>
+          <div style="font-size:.8rem;color:#888;margin-top:2px;">Browse program photos — in-person camp, online activities, family moments & final showcase</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:4px;">photos.app.goo.gl</div>
+        </div>
+        <span style="font-size:.75rem;color:#4FC3F7;font-weight:700;flex-shrink:0;">Open ↗</span>
+      </a>
+
+      <!-- YouTube channel -->
+      <a href="https://youtube.com/@lifeinterventionprogram?si=hkUgzar9qzuL94Ds" target="_blank" rel="noopener"
+         style="background:#fff;border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-left:4px solid #FF0000;"
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.1)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'">
+        <div style="font-size:2rem;flex-shrink:0;">▶️</div>
+        <div style="flex:1;">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;color:var(--navy);">YouTube Channel</div>
+          <div style="font-size:.8rem;color:#888;margin-top:2px;">Program videos, training recaps, and showcase highlights</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:4px;">youtube.com/@lifeinterventionprogram</div>
+        </div>
+        <span style="font-size:.75rem;color:#FF0000;font-weight:700;flex-shrink:0;">Open ↗</span>
+      </a>
+
+      <!-- Program Intro Video -->
+      <a href="https://youtu.be/9S38OyVy6-w" target="_blank" rel="noopener"
+         style="background:#fff;border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-left:4px solid #FF0000;"
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.1)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'">
+        <div style="background:#FF0000;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;">▶</div>
+        <div style="flex:1;">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;color:var(--navy);">Program Introduction Video</div>
+          <div style="font-size:.8rem;color:#888;margin-top:2px;">Watch our program introduction — mission, approach, and what makes this program special</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:4px;">youtu.be/9S38OyVy6-w</div>
+        </div>
+        <span style="font-size:.75rem;color:#FF0000;font-weight:700;flex-shrink:0;">Watch ↗</span>
+      </a>
+
+      <!-- True Love -->
+      <a href="#" target="_blank" rel="noopener"
+         style="background:#fff;border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-left:4px solid #e53935;"
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.1)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'">
+        <img src="data:image/png;base64,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" alt="True Love" style="height:44px;width:auto;flex-shrink:0;">
+        <div style="flex:1;">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;color:var(--navy);">True Love</div>
+          <div style="font-size:.8rem;color:#888;margin-top:2px;">Our non-profit partner dedicated to supporting individuals with special needs</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:4px;">Link coming soon</div>
+        </div>
+        <span style="font-size:.75rem;color:#e53935;font-weight:700;flex-shrink:0;">Open ↗</span>
+      </a>
+
+      <!-- UTK Special Education -->
+      <a href="https://cehdpro.utk.edu/departments/theory-practice/special-education/" target="_blank" rel="noopener"
+         style="background:#fff;border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;border-left:4px solid #FF6600;"
+         onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,.1)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,.06)'">
+        <img src="data:image/png;base64,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" alt="UTK" style="height:44px;width:auto;flex-shrink:0;">
+        <div style="flex:1;">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.95rem;color:var(--navy);">UTK Special Education</div>
+          <div style="font-size:.8rem;color:#888;margin-top:2px;">University of Tennessee, Knoxville — Department of Special Education</div>
+          <div style="font-size:.75rem;color:#aaa;margin-top:4px;">utk.edu</div>
+        </div>
+        <span style="font-size:.75rem;color:#FF6600;font-weight:700;flex-shrink:0;">Open ↗</span>
+      </a>
+
+      <!-- Add more links note -->
+      <div style="background:#f8f9ff;border-radius:16px;padding:18px 24px;display:flex;align-items:center;gap:16px;border:2px dashed #dde;margin-top:8px;">
+        <div style="font-size:1.8rem;">➕</div>
+        <div>
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.88rem;color:#aaa;">More links coming soon</div>
+          <div style="font-size:.78rem;color:#bbb;margin-top:2px;">Social media, partner organizations, press coverage, and more will be added here as the program grows.</div>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
-</div><!-- /page-photos -->
+</div><!-- /page-links -->
 
-<!-- CONTACT PAGE -->
 <div id="page-contact" class="site-page">
 <div class="back-bar"><a href="#" onclick="showHome(event)">🏠 Home</a><span class="sep"> › </span><span>Contact</span></div>
 <section style="background:var(--soft);">
@@ -1324,7 +2215,7 @@
 </div><!-- /page-contact -->
 
 <footer>
-  <div><strong>2026 True Love × University of Tennessee Knoxville</strong><br>Summer Life Intervention Program</div>
+  <div><strong>2026 True Love × University of Tennessee Knoxville</strong><br>Life Intervention Program · Launched Summer 2026</div>
   <div style="margin-top:10px;">
     <a href="mailto:lifeskillsfor365@gmail.com" style="color:var(--sun);font-weight:700;font-size:.95rem;text-decoration:none;">✉️ lifeskillsfor365@gmail.com</a>
   </div>
@@ -1410,6 +2301,21 @@
   });
 
   // ── BIO TOGGLE ──
+  function toggleVideo(el) {
+    const embed = el.nextElementSibling;
+    const isOpen = embed.style.display !== 'none';
+    embed.style.display = isOpen ? 'none' : 'block';
+    const label = el.querySelector('span:last-child');
+    label.textContent = isOpen ? 'Click to play ▼' : 'Click to close ▲';
+  }
+
+  function toggleQA(el) {
+    const answer = el.nextElementSibling;
+    const isOpen = el.classList.contains('open');
+    el.classList.toggle('open', !isOpen);
+    answer.classList.toggle('open', !isOpen);
+  }
+
   function toggleBio(btn) {
     const bio = btn.parentElement;
     const preview = bio.querySelector('.bio-preview');
